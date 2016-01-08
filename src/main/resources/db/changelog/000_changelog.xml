@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="788722 (generated)" id="1452210454037-1">
+        <createTable tableName="Actor">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ActorPK"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-2">
+        <createTable tableName="Director">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="DirectorPK"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-3">
+        <createTable tableName="Genre">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="GenrePK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-4">
+        <createTable tableName="Language">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="LanguagePK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-5">
+        <createTable tableName="Movie">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="MoviePK"/>
+            </column>
+            <column name="length" type="INT"/>
+            <column name="released" type="INT"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="director_id" type="BIGINT"/>
+            <column name="genre_id" type="BIGINT"/>
+            <column name="language_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-6">
+        <createTable tableName="MovieCopy">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="MovieCopyPK"/>
+            </column>
+            <column name="available" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="movie_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-7">
+        <createTable tableName="movie_actor_xref">
+            <column name="movie_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="actor_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-8">
+        <addPrimaryKey columnNames="movie_id, actor_id" tableName="movie_actor_xref"/>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-9">
+        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="Movie" constraintName="FK_8bawo0p3xa0sagon5454nuw7m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Genre"/>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-10">
+        <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="Movie" constraintName="FK_enpd24isfdyuqs4kbocbvvhrg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Language"/>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-11">
+        <addForeignKeyConstraint baseColumnNames="director_id" baseTableName="Movie" constraintName="FK_jgm4of4vm6u8jn7xld4u2ys4s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Director"/>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-12">
+        <addForeignKeyConstraint baseColumnNames="actor_id" baseTableName="movie_actor_xref" constraintName="FK_rxm5t9p6pe2u9g1qgjhkpdsw5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Actor"/>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-13">
+        <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="movie_actor_xref" constraintName="FK_t2qg2uaut60bd9ulewnuta0ty" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
+    </changeSet>
+    <changeSet author="788722 (generated)" id="1452210454037-14">
+        <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="MovieCopy" constraintName="FK_tq7hn5ddo2qyl2yx6vsm7kf8t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
+    </changeSet>
+</databaseChangeLog>
