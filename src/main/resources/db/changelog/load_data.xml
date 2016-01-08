@@ -61,4 +61,12 @@
         </loadData>
     </changeSet>
     
+    <changeSet id="movie-to-genre-xref-initial-data" author="jkupcho">
+       	<loadData encoding="UTF-8"
+                  file="db/data/movie_genre_xref.csv"
+                  separator=";"
+                  tableName="movie_genre_xref">
+        </loadData>
+    </changeSet>
+    
 </databaseChangeLog>

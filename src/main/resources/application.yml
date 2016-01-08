@@ -6,3 +6,9 @@ spring:
 
 liquibase:
   change-log: db/master.xml
+  
+logging:
+  level:
+    root: ERROR
+    com:
+      brew: DEBUG

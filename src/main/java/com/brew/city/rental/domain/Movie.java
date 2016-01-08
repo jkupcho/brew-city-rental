@@ -11,10 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Document(indexName = "movie")
@@ -26,9 +25,13 @@ public class Movie {
 
 	private String title;
 	
-	@ManyToOne
-	@JoinColumn(name="genre_id")
-	private Genre genre;
+	@ManyToMany
+	@JoinTable(
+		name = "movie_genre_xref",
+		joinColumns = { @JoinColumn(name="movie_id", referencedColumnName="id") },
+		inverseJoinColumns = { @JoinColumn(name="genre_id", referencedColumnName="id") }
+	)
+	private Set<Genre> genre = new HashSet<>();
 	
 	private Integer released;
 	
@@ -38,12 +41,14 @@ public class Movie {
 	@JoinColumn(name="language_id")
 	private Language language;
 	
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="movie_actor_xref",
 			   joinColumns = { @JoinColumn(name="movie_id", referencedColumnName="id") },
 			   inverseJoinColumns = { @JoinColumn(name="actor_id", referencedColumnName="id") })
 	private Set<Actor> actors = new HashSet<>();
+	
+	@OneToMany(mappedBy="movie")
+	private Set<Review> reviews = new HashSet<>();
 	
 	@ManyToOne
 	@JoinColumn(name="director_id")
@@ -65,12 +70,20 @@ public class Movie {
 		this.title = title;
 	}
 
-	public Genre getGenre() {
+	public Set<Genre> getGenre() {
 		return genre;
 	}
 
-	public void setGenre(Genre genre) {
+	public void setGenre(Set<Genre> genre) {
 		this.genre = genre;
+	}
+
+	public Set<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	public Integer getReleased() {
