@@ -17,7 +17,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.annotations.NestedField;
 
 @Entity
 @Document(indexName = "movies")
@@ -57,13 +56,8 @@ public class Movie {
 	@JoinColumn(name="director_id")
 	private Director director;
 	
-	@OneToMany
-	@JoinTable(
-		name="movie_reviews",
-		joinColumns = @JoinColumn(name="movie_id"),
-		inverseJoinColumns = @JoinColumn(name="review_id")
-	)
-	@Field(type=FieldType.Nested)
+	@OneToMany(mappedBy="movie")
+	@Field(type=FieldType.Nested, includeInParent=true)
 	private Set<Review> reviews = new HashSet<>();
 	
 	public Set<Review> getReviews() {

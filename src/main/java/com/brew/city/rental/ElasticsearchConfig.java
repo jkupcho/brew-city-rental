@@ -7,10 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchMappingContext;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.data.elasticsearch.repository.support.ElasticsearchRepositoryFactoryBean;
-
-import com.brew.city.rental.ElasticsearchConfig.RestElasticSearchFactoryBean;
 
 @Configuration
 public class ElasticsearchConfig {

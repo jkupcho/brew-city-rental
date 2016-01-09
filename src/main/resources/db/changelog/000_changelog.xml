@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="Jonathan (generated)" id="1452319342237-1">
+    <changeSet author="Jonathan (generated)" id="1452355006419-1">
         <createTable tableName="Actor">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ActorPK"/>
@@ -9,7 +9,7 @@
             <column name="last_name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-2">
+    <changeSet author="Jonathan (generated)" id="1452355006419-2">
         <createTable tableName="Director">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="DirectorPK"/>
@@ -18,7 +18,7 @@
             <column name="last_name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-3">
+    <changeSet author="Jonathan (generated)" id="1452355006419-3">
         <createTable tableName="Genre">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="GenrePK"/>
@@ -26,7 +26,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-4">
+    <changeSet author="Jonathan (generated)" id="1452355006419-4">
         <createTable tableName="Language">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="LanguagePK"/>
@@ -34,7 +34,7 @@
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-5">
+    <changeSet author="Jonathan (generated)" id="1452355006419-5">
         <createTable tableName="Movie">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="MoviePK"/>
@@ -46,7 +46,7 @@
             <column name="language_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-6">
+    <changeSet author="Jonathan (generated)" id="1452355006419-6">
         <createTable tableName="MovieCopy">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="MovieCopyPK"/>
@@ -57,17 +57,18 @@
             <column name="movie_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-7">
+    <changeSet author="Jonathan (generated)" id="1452355006419-7">
         <createTable tableName="Review">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="ReviewPK"/>
             </column>
             <column name="rating" type="INT"/>
             <column name="text" type="VARCHAR(255)"/>
+            <column name="movie_id" type="BIGINT"/>
             <column name="user_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-8">
+    <changeSet author="Jonathan (generated)" id="1452355006419-8">
         <createTable tableName="User">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="UserPK"/>
@@ -76,7 +77,7 @@
             <column name="last_name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-9">
+    <changeSet author="Jonathan (generated)" id="1452355006419-9">
         <createTable tableName="movie_actor_xref">
             <column name="movie_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -86,7 +87,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-10">
+    <changeSet author="Jonathan (generated)" id="1452355006419-10">
         <createTable tableName="movie_genre_xref">
             <column name="movie_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -96,56 +97,37 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-11">
-        <createTable tableName="movie_reviews">
-            <column name="movie_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="review_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-12">
+    <changeSet author="Jonathan (generated)" id="1452355006419-11">
         <addPrimaryKey columnNames="movie_id, actor_id" tableName="movie_actor_xref"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-13">
+    <changeSet author="Jonathan (generated)" id="1452355006419-12">
         <addPrimaryKey columnNames="movie_id, genre_id" tableName="movie_genre_xref"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-14">
-        <addPrimaryKey columnNames="movie_id, review_id" tableName="movie_reviews"/>
+    <changeSet author="Jonathan (generated)" id="1452355006419-13">
+        <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="Review" constraintName="FK_a7m95wp8ynt381gt5dq4xg443" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-15">
-        <addUniqueConstraint columnNames="review_id" tableName="movie_reviews"/>
-    </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-16">
-        <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="movie_reviews" constraintName="FK_1ir42kiy6cl5p9uo5j16xi2lv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
-    </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-17">
-        <addForeignKeyConstraint baseColumnNames="review_id" baseTableName="movie_reviews" constraintName="FK_8j8dichop5xcu4r7iujduqxj6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Review"/>
-    </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-18">
+    <changeSet author="Jonathan (generated)" id="1452355006419-14">
         <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="movie_genre_xref" constraintName="FK_btin1lphvgb5fk34gr7ceyvwk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-19">
+    <changeSet author="Jonathan (generated)" id="1452355006419-15">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="Review" constraintName="FK_ctpcwm42wnp8voxqtp6wxawx0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="User"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-20">
+    <changeSet author="Jonathan (generated)" id="1452355006419-16">
         <addForeignKeyConstraint baseColumnNames="language_id" baseTableName="Movie" constraintName="FK_enpd24isfdyuqs4kbocbvvhrg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Language"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-21">
+    <changeSet author="Jonathan (generated)" id="1452355006419-17">
         <addForeignKeyConstraint baseColumnNames="director_id" baseTableName="Movie" constraintName="FK_jgm4of4vm6u8jn7xld4u2ys4s" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Director"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-22">
+    <changeSet author="Jonathan (generated)" id="1452355006419-18">
         <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="movie_genre_xref" constraintName="FK_qdafw482kolswkgtkd9wixadd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Genre"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-23">
+    <changeSet author="Jonathan (generated)" id="1452355006419-19">
         <addForeignKeyConstraint baseColumnNames="actor_id" baseTableName="movie_actor_xref" constraintName="FK_rxm5t9p6pe2u9g1qgjhkpdsw5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Actor"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-24">
+    <changeSet author="Jonathan (generated)" id="1452355006419-20">
         <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="movie_actor_xref" constraintName="FK_t2qg2uaut60bd9ulewnuta0ty" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
     </changeSet>
-    <changeSet author="Jonathan (generated)" id="1452319342237-25">
+    <changeSet author="Jonathan (generated)" id="1452355006419-21">
         <addForeignKeyConstraint baseColumnNames="movie_id" baseTableName="MovieCopy" constraintName="FK_tq7hn5ddo2qyl2yx6vsm7kf8t" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="Movie"/>
     </changeSet>
 </databaseChangeLog>

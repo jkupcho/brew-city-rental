@@ -21,8 +21,12 @@ public class Review {
 
 	@ManyToOne
 	@JoinColumn(name="user_id")
-	@Field(type=FieldType.Object, includeInParent=true)
+	@Field(type=FieldType.Object)
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="movie_id")
+	private Movie movie;
 	
 	private Integer rating;
 	
