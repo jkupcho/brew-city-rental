@@ -11,12 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.NestedField;
 
 @Entity
-@Document(indexName = "movie")
+@Document(indexName = "movies")
 public class Movie {
 	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -42,18 +43,17 @@ public class Movie {
 	private Language language;
 	
 	@ManyToMany
-	@JoinTable(name="movie_actor_xref",
-			   joinColumns = { @JoinColumn(name="movie_id", referencedColumnName="id") },
-			   inverseJoinColumns = { @JoinColumn(name="actor_id", referencedColumnName="id") })
+	@JoinTable(
+		name="movie_actor_xref",
+		joinColumns = { @JoinColumn(name="movie_id", referencedColumnName="id") },
+		inverseJoinColumns = { @JoinColumn(name="actor_id", referencedColumnName="id") })
 	private Set<Actor> actors = new HashSet<>();
 	
-	@OneToMany(mappedBy="movie")
-	private Set<Review> reviews = new HashSet<>();
-	
+	@NestedField(dotSuffix="director", type = FieldType.Object)
 	@ManyToOne
 	@JoinColumn(name="director_id")
 	private Director director;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -76,14 +76,6 @@ public class Movie {
 
 	public void setGenre(Set<Genre> genre) {
 		this.genre = genre;
-	}
-
-	public Set<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(Set<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 	public Integer getReleased() {

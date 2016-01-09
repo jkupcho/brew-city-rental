@@ -37,6 +37,14 @@
         </loadData>
     </changeSet>
     
+    <changeSet id="movie-initial-data" author="jkupcho">
+       	<loadData encoding="UTF-8"
+                  file="db/data/movies.csv"
+                  separator=";"
+                  tableName="movie">
+        </loadData>
+    </changeSet>
+    
     <changeSet id="genre-initial-data" author="jkupcho">
        	<loadData encoding="UTF-8"
                   file="db/data/genres.csv"
@@ -45,11 +53,11 @@
         </loadData>
     </changeSet>
     
-    <changeSet id="movie-initial-data" author="jkupcho">
+    <changeSet id="movie-to-genre-xref-initial-data" author="jkupcho">
        	<loadData encoding="UTF-8"
-                  file="db/data/movies.csv"
+                  file="db/data/movie_genre_xref.csv"
                   separator=";"
-                  tableName="movie">
+                  tableName="movie_genre_xref">
         </loadData>
     </changeSet>
     
@@ -61,11 +69,19 @@
         </loadData>
     </changeSet>
     
-    <changeSet id="movie-to-genre-xref-initial-data" author="jkupcho">
+    <changeSet id="user-initial-data" author="jkupcho">
        	<loadData encoding="UTF-8"
-                  file="db/data/movie_genre_xref.csv"
+                  file="db/data/user.csv"
                   separator=";"
-                  tableName="movie_genre_xref">
+                  tableName="user">
+        </loadData>
+    </changeSet>
+    
+    <changeSet id="reviews-initial-data" author="jkupcho">
+       	<loadData encoding="UTF-8"
+                  file="db/data/reviews.csv"
+                  separator=";"
+                  tableName="review">
         </loadData>
     </changeSet>
     

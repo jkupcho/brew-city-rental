@@ -1,12 +1,5 @@
-spring:
-  jpa:
-    hibernate:
-      ddl-auto: none
-    database: h2
-
 liquibase:
-  change-log: db/master.xml
-  
+  enabled: false
 logging:
   level:
     root: ERROR

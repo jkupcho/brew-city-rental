@@ -7,7 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 @Entity
+@Document(indexName = "reviews")
 public class Review {
 	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -17,6 +20,10 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name="movie_id")
 	private Movie movie;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	private Integer rating;
 	

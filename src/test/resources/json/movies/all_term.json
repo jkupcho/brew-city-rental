@@ -1,0 +1,8 @@
+{
+	"fuzzy": {
+		"director.lastName": {
+			"value": "Nola",
+			"fuzziness": 2
+		}
+	}
+}
