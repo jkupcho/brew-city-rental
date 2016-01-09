@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Entity
 @Document(indexName = "reviews")
@@ -18,11 +20,8 @@ public class Review {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name="movie_id")
-	private Movie movie;
-	
-	@ManyToOne
 	@JoinColumn(name="user_id")
+	@Field(type=FieldType.Object, includeInParent=true)
 	private User user;
 	
 	private Integer rating;
@@ -35,14 +34,6 @@ public class Review {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Movie getMovie() {
-		return movie;
-	}
-
-	public void setMovie(Movie movie) {
-		this.movie = movie;
 	}
 
 	public Integer getRating() {

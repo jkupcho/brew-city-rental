@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldIndex;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.NestedField;
 
@@ -24,6 +27,7 @@ public class Movie {
 	@Id
 	private Long id;
 
+	@Field(type=FieldType.String, index=FieldIndex.not_analyzed)
 	private String title;
 	
 	@ManyToMany
@@ -49,11 +53,27 @@ public class Movie {
 		inverseJoinColumns = { @JoinColumn(name="actor_id", referencedColumnName="id") })
 	private Set<Actor> actors = new HashSet<>();
 	
-	@NestedField(dotSuffix="director", type = FieldType.Object)
 	@ManyToOne
 	@JoinColumn(name="director_id")
 	private Director director;
 	
+	@OneToMany
+	@JoinTable(
+		name="movie_reviews",
+		joinColumns = @JoinColumn(name="movie_id"),
+		inverseJoinColumns = @JoinColumn(name="review_id")
+	)
+	@Field(type=FieldType.Nested)
+	private Set<Review> reviews = new HashSet<>();
+	
+	public Set<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(Set<Review> reviews) {
+		this.reviews = reviews;
+	}
+
 	public Long getId() {
 		return id;
 	}

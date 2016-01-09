@@ -30,7 +30,6 @@ public class IndexBuilder {
 	public void indexMovies() {
 		logger.debug("Loading movies into elasticsearch index");
 		movieRepository.findAll().forEach(movieSearchRepository::save);
-		reviewRepository.findAll().forEach(reviewSearchRepository::save);
 		logger.debug("Finished indexing movies");
 	}
 

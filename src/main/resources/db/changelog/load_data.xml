@@ -85,4 +85,12 @@
         </loadData>
     </changeSet>
     
+    <changeSet id="movie-reviews-initial-data" author="jkupcho">
+       	<loadData encoding="UTF-8"
+                  file="db/data/movie_reviews.csv"
+                  separator=";"
+                  tableName="movie_reviews">
+        </loadData>
+    </changeSet>
+    
 </databaseChangeLog>
