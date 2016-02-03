@@ -5,11 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.brew.city.rental.ElasticsearchConfig.RestElasticSearchFactoryBean;
-
 @SpringBootApplication
 @EnableJpaRepositories("com.brew.city.rental.repo")
-@EnableElasticsearchRepositories(basePackages="com.brew.city.rental.repo.search", repositoryFactoryBeanClass=RestElasticSearchFactoryBean.class)
+@EnableElasticsearchRepositories(basePackages="com.brew.city.rental.repo.search", repositoryFactoryBeanClass=RestElasticsearchRepositoryFactoryBean.class)
 public class BrewCityRentalApplication {
 
 	public static void main(String[] args) {

@@ -5,3 +5,5 @@ logging:
     root: ERROR
     com:
       brew: DEBUG
+    org:
+      elasticsearch: ERROR
