@@ -25,13 +25,13 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.brew.city.rental.BrewCityRentalApplication;
-import com.brew.city.rental.IndexBuilder;
 import com.brew.city.rental.domain.Movie;
+import com.brew.city.rental.repo.search.config.ElasticsearchIntegrationConfig;
+import com.brew.city.rental.repo.search.config.IndexBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = BrewCityRentalApplication.class)
-@ActiveProfiles("local")
+@SpringApplicationConfiguration(classes = ElasticsearchIntegrationConfig.class)
+@ActiveProfiles({"local", "testElasticSearch"})
 public class MovieSearchRepositoryIntegrationTest {
 
 	@Autowired
